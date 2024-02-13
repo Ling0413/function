@@ -72,11 +72,14 @@ if __name__ == "__main__":
             CPU_QUERY = f'rate(container_cpu_usage_seconds_total{{pod="{pod_name}"}}[1m])'
             MEM_QUERY = f'container_memory_usage_bytes{{pod="{pod_name}"}}'
             MAX_MEM_QUERY = f'max_over_time(container_memory_usage_bytes{{pod="{pod_name}"}}[1m])'
-       # run_wrk2(NODE)
+            test_Q = f'rate(kepler_container_energy_stat{{pod="{pod_name}"}}[1m])'
+        run_wrk2(NODE)
         cpu_data = get_prometheus_data(CPU_QUERY)
         cpu_values = [result["value"] for result in cpu_data["data"]["result"]]
         cpu = cpu_values[0][1]
         print(cpu)
+        test = get_prometheus_data(test_Q)
+        print(test)
         memory_data = get_prometheus_data(MEM_QUERY)
         memory_values = [result["value"] for result in memory_data["data"]["result"]]
         memory = memory_values[0][1]
@@ -84,6 +87,4 @@ if __name__ == "__main__":
         
     except Exception as e:
         print(f"Error occurred: {e}")
-
-
 
