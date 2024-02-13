@@ -2,36 +2,36 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app: base64-app
-  name: base64-app
+    app: compress-app
+  name: compress-app
   namespace: default
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: base64-app
+      app: compress-app
   template:
     metadata:
       labels:
-        app: base64-app
+        app: compress-app
     spec:
       containers:
-      - image: haoranq4/base64:latest
+      - image: haoranq4/compress:latest
         imagePullPolicy: IfNotPresent
-        name: base64
+        name: compress-container
       dnsPolicy: ClusterFirst
       restartPolicy: Always
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: base64-app
+  name: compress-app
   namespace: default
 spec:
   type: NodePort
   selector:
-    app: base64-app
+    app: compress-app
   ports:
   - port: 8000
     targetPort: 8000
-    nodePort: 30001
+    nodePort: 30002

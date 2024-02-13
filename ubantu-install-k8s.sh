@@ -197,7 +197,7 @@ elif [ "$1" == "master" ]; then
     change_hostname "master-node"
     init_master
     #deploy_calico
-    deploy_flannel
+    #deploy_flannel
     deploy_metrics
     #validate_calico_services
     #validate_kubernetes_services
