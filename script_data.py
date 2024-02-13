@@ -13,10 +13,10 @@ def start_port_forward(deployment, local_port, target_port):
     启动 kubectl port-forward 来转发部署端口到本地端口。
     """
     command = f'kubectl port-forward deployment/{deployment} {local_port}:{target_port}'
-    command1 = f'kubectl port-forward prometheus-k8s-0 8080:9090 -n monitoring'
+    #command1 = f'kubectl port-forward prometheus-k8s-0 8080:9090 -n monitoring'
     # 使用 Popen 而不是 run，以便命令在后台运行
     subprocess.Popen(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-    subprocess.Popen(command1, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    #subprocess.Popen(command1, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
 
 def get_base64_pods():
     base64_pods = []  # 创建一个空列表来存储 Pod 名称
@@ -65,14 +65,14 @@ if __name__ == "__main__":
     try:
         start_port_forward('base64-app', '33125', '8000')
         print("Port forwarding started. Waiting for it to take effect...")
-        time.sleep(10)
+        #time.sleep(10)
         base64_pods = get_base64_pods()
         if base64_pods:
             pod_name = base64_pods[0]
             CPU_QUERY = f'rate(container_cpu_usage_seconds_total{{pod="{pod_name}"}}[1m])'
             MEM_QUERY = f'container_memory_usage_bytes{{pod="{pod_name}"}}'
             MAX_MEM_QUERY = f'max_over_time(container_memory_usage_bytes{{pod="{pod_name}"}}[1m])'
-        run_wrk2(NODE)
+       # run_wrk2(NODE)
         cpu_data = get_prometheus_data(CPU_QUERY)
         cpu_values = [result["value"] for result in cpu_data["data"]["result"]]
         cpu = cpu_values[0][1]
