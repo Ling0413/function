@@ -1,0 +1,9 @@
+https://github.com/Ling0413/function.git
+
+kubeadm join 192.168.31.40:6443 --token cec5ag.z7swh3tsumkmtm2v \
+	--discovery-token-ca-cert-hash sha256:b9bb4611096a49c33ddf21a370cce0230e8fafb3937f62b7b17ff4daca2e3088 
+[INFO] Kubeadm initialization successful!
+[INFO] Please note the following information to join worker nodes to the cluster:
+kubeadm join 192.168.31.40:6443 --token baipx5.4qggl3i350av98of --discovery-token-ca-cert-hash sha256:b9bb4611096a49c33ddf21a370cce0230e8fafb3937f62b7b17ff4daca2e3088  --cri-socket unix:///var/run/cri-dockerd.sock
+[INFO] Creating directories, copying configuration files, and adjusting permissions...
+
